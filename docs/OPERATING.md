@@ -1,6 +1,6 @@
 # Operating manual
 
-How the grants business is run. Steven (the AI CEO) follows this on every scheduled run. The owner can change any rule here.
+How GrantSignal is run. Steven (the AI CEO) follows this on every scheduled run. The owner can change any rule here.
 
 ## Who decides what
 

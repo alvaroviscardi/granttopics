@@ -22,6 +22,6 @@
 - Third-party SBIR trackers already publishing open solicitations.
 
 ## Owner to-dos
-- Pick a name; create an empty GitHub repo and connect the Claude GitHub App to it.
+- Check that the GrantSignal name and domain are free; buy the domain.
 - Allow api.grants.gov, www.grants.gov, www.sbir.gov and api.www.sbir.gov in the environment's network settings.
 - Later: Stripe account (needed for paid alerts).
