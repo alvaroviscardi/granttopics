@@ -7,3 +7,5 @@
 | 2026-10-15 | Confirmed program is active | SBIR/STTR reauthorized April 13, 2026 through Sept 30, 2031 (sba.gov, 2026-04-13) after a lapse from Oct 1, 2025 |
 | 2026-10-15 | No application writing, no eligibility judgments | Highest liability risk |
 | 2026-10-15 | Name: GrantSignal; repo alvaroviscardi/grantsignal, separate from ShipStack | Each business keeps its own site, data, reports and history |
+| 2026-10-15 | Renamed GrantSignal → GrantTopics; repo → alvaroviscardi/granttopics | "GrantSignal" is already used by a grants product (Wakaga GrantSignal); no product found named GrantTopics |
+| 2026-10-15 | Treat each agency's own page as the source of truth, not SBIR.gov | SBIR.gov says its topic listings are copies and may not be the latest |

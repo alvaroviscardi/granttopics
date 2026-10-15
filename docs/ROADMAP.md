@@ -2,7 +2,7 @@
 
 ## v0.1: data pipeline (blocked on network access)
 - Fetch open and forecasted opportunities from the Grants.gov API (search2 and fetchOpportunity; no key needed per Grants.gov).
-- Fetch open SBIR/STTR solicitations from SBIR.gov and agency portals.
+- Fetch open SBIR/STTR solicitations from SBIR.gov and agency portals. SBIR.gov listings are copies and may lag; the agency's own page is the source of truth for every listing.
 - Store each record in `data/` with its source URL, fetch date, and fields copied exactly.
 - Validation: every record has a source link, a deadline in a valid date format, and an agency.
 
@@ -19,9 +19,10 @@
 
 ## Competition to study before v0.2
 - Existing paid grant alert services, some reportedly priced at hundreds of dollars a month and built on the same free government API.
-- Third-party SBIR trackers already publishing open solicitations.
+- FedScout (iPhone app with SBIR alerts), GrantedAI (free weekly SBIR email alerts), a Grants.gov alert service with 14/7/1-day reminders.
+- Basic alerts are already free elsewhere. Planned edge: track each agency's official page (SBIR.gov copies can lag), cover more agencies, and make it easy to see how each topic matches a startup's technology.
 
 ## Owner to-dos
-- Check that the GrantSignal name and domain are free; buy the domain.
+- Check that the GrantTopics domain and trademark are free (tmsearch.uspto.gov); buy the domain.
 - Allow api.grants.gov, www.grants.gov, www.sbir.gov and api.www.sbir.gov in the environment's network settings.
 - Later: Stripe account (needed for paid alerts).
