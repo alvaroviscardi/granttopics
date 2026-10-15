@@ -1,6 +1,14 @@
 # Roadmap
 
-## v0.1: data pipeline (blocked on network access)
+## v0.1: data pipeline
+Status 2026-10-15: Grants.gov part done (`npm run fetch`, `npm test`). First run: 29 opportunities (21 open, 8 forecasted), 0 held.
+
+Learned on the first run:
+- Keyword "SBIR" also matches broad agency announcements that only mention SBIR (some close in 2040+). Need a relevance filter before publishing.
+- Award ceiling is often blank, "none" or "0" in Grants.gov. Show these as "Not listed", never "$0".
+- Grants.gov is mostly NIH, NSF, USDA and some DoD. Most DoD SBIR topics are published on DoD's own SBIR/STTR portal, so that portal is the next source to add (needs its domain allowed).
+- SBIR.gov API returns 403; its site says the API is under maintenance (2026-10-15).
+
 - Fetch open and forecasted opportunities from the Grants.gov API (search2 and fetchOpportunity; no key needed per Grants.gov).
 - Fetch open SBIR/STTR solicitations from SBIR.gov and agency portals. SBIR.gov listings are copies and may lag; the agency's own page is the source of truth for every listing.
 - Store each record in `data/` with its source URL, fetch date, and fields copied exactly.

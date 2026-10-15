@@ -1,0 +1,9 @@
+{
+  "name": "granttopics",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "fetch": "NODE_USE_ENV_PROXY=1 node scripts/fetch-grantsgov.mjs",
+    "test": "node scripts/validate.mjs"
+  }
+}
