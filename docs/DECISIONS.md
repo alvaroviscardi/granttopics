@@ -9,3 +9,4 @@
 | 2026-10-15 | Name: GrantSignal; repo alvaroviscardi/grantsignal, separate from ShipStack | Each business keeps its own site, data, reports and history |
 | 2026-10-15 | Renamed GrantSignal → GrantTopics; repo → alvaroviscardi/granttopics | "GrantSignal" is already used by a grants product (Wakaga GrantSignal); no product found named GrantTopics |
 | 2026-10-15 | Treat each agency's own page as the source of truth, not SBIR.gov | SBIR.gov says its topic listings are copies and may not be the latest |
+| 2026-10-15 | Owner renamed the GitHub repo to granttopics | Matches the new name |
