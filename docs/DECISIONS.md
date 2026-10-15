@@ -11,3 +11,4 @@
 | 2026-10-15 | Treat each agency's own page as the source of truth, not SBIR.gov | SBIR.gov says its topic listings are copies and may not be the latest |
 | 2026-10-15 | Owner renamed the GitHub repo to granttopics | Matches the new name |
 | 2026-10-15 | First data source: Grants.gov API; SBIR.gov API skipped while under maintenance | Grants.gov works without a key; SBIR.gov API returns 403 |
+| 2026-10-15 | Second source: DoD SBIR/STTR portal public topics API | Largest SBIR funder; most DoD topics aren't on Grants.gov |

@@ -1,5 +1,5 @@
 // Pulls open and forecasted SBIR/STTR opportunities from the Grants.gov API
-// into data/opportunities.json. Values are copied exactly as Grants.gov returns them;
+// into data/grantsgov.json. Values are copied exactly as Grants.gov returns them;
 // nothing is reworded or inferred. Every record keeps its official source link.
 import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -67,5 +67,5 @@ for (const h of hits.values()) {
 
 records.sort((a, b) => a.agency.localeCompare(b.agency) || a.title.localeCompare(b.title));
 mkdirSync(join(root, "data"), { recursive: true });
-writeFileSync(join(root, "data/opportunities.json"), JSON.stringify(records, null, 2) + "\n");
+writeFileSync(join(root, "data/grantsgov.json"), JSON.stringify(records, null, 2) + "\n");
 console.log(`Saved ${records.length} opportunities (${records.filter(r => r.status === "posted").length} open, ${records.filter(r => r.status === "forecasted").length} forecasted).`);

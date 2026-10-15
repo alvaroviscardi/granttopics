@@ -6,7 +6,8 @@ Status 2026-10-15: Grants.gov part done (`npm run fetch`, `npm test`). First run
 Learned on the first run:
 - Keyword "SBIR" also matches broad agency announcements that only mention SBIR (some close in 2040+). Need a relevance filter before publishing.
 - Award ceiling is often blank, "none" or "0" in Grants.gov. Show these as "Not listed", never "$0".
-- Grants.gov is mostly NIH, NSF, USDA and some DoD. Most DoD SBIR topics are published on DoD's own SBIR/STTR portal, so that portal is the next source to add (needs its domain allowed).
+- Grants.gov is mostly NIH, NSF, USDA and some DoD. Most DoD SBIR topics are on DoD's own SBIR/STTR portal.
+- 2026-10-15: DoD portal added (`scripts/fetch-dod.mjs`): 71 topics (44 open, 27 pre-release) across USAF, OSD, DARPA, Army, Navy, SOCOM. Includes objective, keywords, technology areas and ITAR flag. No award amounts in the feed; show "see solicitation". Source link is the portal's topics page plus the topic code (no per-topic public URL found yet).
 - SBIR.gov API returns 403; its site says the API is under maintenance (2026-10-15).
 
 - Fetch open and forecasted opportunities from the Grants.gov API (search2 and fetchOpportunity; no key needed per Grants.gov).
