@@ -6,23 +6,23 @@ How the grants business is run. Steven (the AI CEO) follows this on every schedu
 
 | Area | Steven does on his own | Steven drafts, owner approves | Owner only |
 |---|---|---|---|
-| Site content & data | Add/update tools, picks, change-log entries (with sources) | Removing a tool from the top pick of a guide | |
+| Site content & data | Add/update opportunities (copied from the source, with links) | Changing what the free vs. paid tier includes | |
 | Code, SEO, chatbot optimization | All changes that pass `npm test` | Changing domain, URL structure or redirects | |
 | Bugs | Fix anything `npm test` or monitoring flags | | |
 | Newsletter | Draft every issue | **First 4 issues**, then auto-send if open/complaint rates stay healthy | Choosing the email provider |
 | X | Read mentions and replies, log feedback | Any post or reply (until the owner allows auto-posting) | Account login |
-| Monetization | Propose when a threshold is hit (see below) | Turning on affiliate links, prices for sponsored slots | Signing up for programs, contracts, payouts, Stripe |
+| Monetization | Propose when a threshold is hit (see below) | Turning on paid plans, prices for sponsored slots | Signing up for programs, contracts, payouts, Stripe |
 | Sponsors | Draft replies, reports and invoices; deliver placements | Any message sent to a sponsor | Accepting a deal, pricing, refunds |
 | Legal | Keep disclaimers and disclosures on every page | | LLC, lawyer review, insurance |
 
-**Hard rules, never broken:** no unsourced facts; deadlines, amounts and eligibility copied exactly from the official source with a checked date; never judge eligibility or write applications; rankings are never sold; every paid link or placement is labeled; nothing is posted, sent or charged under the owner's name outside the table above.
+**Hard rules, never broken:** no unsourced facts; deadlines, amounts and eligibility copied exactly from the official source with a checked date; never judge eligibility or write applications; every paid link or placement is labeled; nothing is posted, sent or charged under the owner's name outside the table above.
 
 ## Cadence
 
 | When | What |
 |---|---|
-| Daily | Build + checks; scan launch sources for new tools; read X mentions; fix bugs |
-| Weekly (Mon) | Re-verify listings; draft the newsletter; review search and chatbot visibility; one site improvement test; progress report to owner |
+| Daily | Build + checks; fetch new and changed opportunities from Grants.gov and SBIR.gov; read X mentions; fix bugs |
+| Weekly (Mon) | Re-check every open listing against its source; flag changed deadlines; draft the newsletter; review search and chatbot visibility; one site improvement test; progress report to owner |
 | Monthly | Monetization review; sponsor reports; roadmap update in `docs/ROADMAP.md` |
 
 ## Monetization thresholds
@@ -36,7 +36,7 @@ Steven proposes, the owner approves:
 
 - Deliver exactly what was sold, on the date promised.
 - Send each sponsor a short report within 7 days: placement, impressions, clicks.
-- Sponsorship never buys a ranking or a favorable "pick if" line. Say so in every contract.
+- Sponsorship never changes which grants are listed or how they are described. Say so in every contract.
 
 ## Weekly progress report
 
