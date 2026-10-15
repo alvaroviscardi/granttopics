@@ -12,3 +12,4 @@
 | 2026-10-15 | Owner renamed the GitHub repo to granttopics | Matches the new name |
 | 2026-10-15 | First data source: Grants.gov API; SBIR.gov API skipped while under maintenance | Grants.gov works without a key; SBIR.gov API returns 403 |
 | 2026-10-15 | Second source: DoD SBIR/STTR portal public topics API | Largest SBIR funder; most DoD topics aren't on Grants.gov |
+| 2026-10-15 | Relevance filter: keep Grants.gov listings whose title names SBIR/STTR or NIH codes R41-R44, SB0, SB1 | Keyword search also returned broad research calls (16 left out on first build) |

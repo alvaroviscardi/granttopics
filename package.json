@@ -6,6 +6,7 @@
     "fetch": "npm run fetch:grantsgov && npm run fetch:dod",
     "fetch:grantsgov": "NODE_USE_ENV_PROXY=1 node --no-warnings scripts/fetch-grantsgov.mjs",
     "fetch:dod": "NODE_USE_ENV_PROXY=1 node --no-warnings scripts/fetch-dod.mjs",
-    "test": "node scripts/validate.mjs"
+    "test": "node scripts/validate.mjs && node scripts/build.mjs",
+    "build": "node scripts/build.mjs"
   }
 }

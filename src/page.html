@@ -1,0 +1,264 @@
+<title>GrantTopics</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Every open and upcoming SBIR and STTR topic for tech startups, with deadlines copied from the official source and a link to it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a deadline docket. Each row leads with its due date, like a clerk's filing board; urgency is the only loud color. */
+:root {
+  --paper: #f3f5f4;
+  --sheet: #ffffff;
+  --ink: #15212a;
+  --muted: #56636c;
+  --rule: #d6dddb;
+  --brand: #0d5c4e;
+  --brand-ink: #ffffff;
+  --soon: #b42318;
+  --soon-bg: #fdecea;
+  --near: #8a5a00;
+  --near-bg: #fbf0d9;
+  --calm: #3c5466;
+  --calm-bg: #e6edf1;
+  --f-display: "Libre Franklin", "Franklin Gothic Medium", "Arial Narrow", system-ui, sans-serif;
+  --f-body: "Libre Franklin", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0f1518; --sheet: #161e22; --ink: #e7ecea; --muted: #97a4ab; --rule: #2a3439;
+    --brand: #5cc4ad; --brand-ink: #062019; --soon: #ff8b7e; --soon-bg: #3a1714; --near: #f0c060; --near-bg: #332611;
+    --calm: #a9c1d1; --calm-bg: #1d2b33; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0f1518; --sheet: #161e22; --ink: #e7ecea; --muted: #97a4ab; --rule: #2a3439;
+  --brand: #5cc4ad; --brand-ink: #062019; --soon: #ff8b7e; --soon-bg: #3a1714; --near: #f0c060; --near-bg: #332611;
+  --calm: #a9c1d1; --calm-bg: #1d2b33; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font: 400 1rem/1.55 var(--f-body); }
+a { color: var(--brand); }
+:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.wrap { max-width: 68rem; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.mono { font-family: var(--f-mono); font-size: .78rem; letter-spacing: .01em; font-variant-numeric: tabular-nums; }
+h1, h2, h3 { font-family: var(--f-display); margin: 0; text-wrap: balance; }
+
+header.top { background: var(--sheet); border-bottom: 1px solid var(--rule); }
+header.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; padding-block: .8rem; }
+.mark { font-family: var(--f-display); font-weight: 800; font-size: 1.2rem; letter-spacing: -.01em; color: var(--ink); text-decoration: none; display: inline-flex; align-items: center; gap: .5rem; }
+.mark i { width: .7rem; height: .7rem; background: var(--brand); display: inline-block; }
+.checked { color: var(--muted); }
+
+.intro { padding-block: 2.25rem 1.25rem; display: grid; gap: .75rem; }
+.intro h1 { font-weight: 800; font-size: clamp(1.9rem, 5vw, 3.1rem); line-height: 1.05; letter-spacing: -.02em; max-width: 22ch; }
+.intro p { margin: 0; color: var(--muted); max-width: 62ch; font-size: 1.05rem; }
+.counts { display: flex; flex-wrap: wrap; gap: .4rem 1.5rem; margin-top: .5rem; }
+.counts div { display: flex; align-items: baseline; gap: .4rem; }
+.counts b { font-family: var(--f-display); font-weight: 800; font-size: 1.5rem; font-variant-numeric: tabular-nums; }
+.counts span { color: var(--muted); font-size: .92rem; }
+.counts .hot b { color: var(--soon); }
+
+.controls { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 4; background: var(--paper); border-block: 1px solid var(--rule); }
+.controls .wrap { display: flex; flex-wrap: wrap; gap: .5rem .75rem; align-items: center; padding-block: .65rem; }
+.search { flex: 1 1 15rem; min-width: 0; font: inherit; padding: .45rem .7rem; border: 1px solid var(--rule); background: var(--sheet); color: var(--ink); border-radius: 3px; }
+.seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; background: var(--sheet); }
+.seg button { all: unset; cursor: pointer; padding: .35rem .7rem; font-size: .88rem; font-weight: 600; color: var(--muted); }
+.seg button + button { border-left: 1px solid var(--rule); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.seg button:focus-visible { outline: 2px solid var(--brand); outline-offset: -2px; }
+select { font: inherit; font-size: .9rem; padding: .4rem .5rem; border: 1px solid var(--rule); background: var(--sheet); color: var(--ink); border-radius: 3px; max-width: 100%; }
+.shown { color: var(--muted); margin-left: auto; }
+
+.docket { list-style: none; margin: 0; padding: 0; }
+.row { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr) auto; gap: 1.25rem; padding-block: 1.1rem; border-bottom: 1px solid var(--rule); align-items: start; }
+.due { display: grid; gap: .15rem; }
+.due .day { font-family: var(--f-display); font-weight: 800; font-size: 1.45rem; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.due .yr { color: var(--muted); }
+.left { justify-self: start; font-size: .78rem; font-weight: 600; padding: .1rem .45rem; border-radius: 2px; background: var(--calm-bg); color: var(--calm); margin-top: .25rem; }
+.left.soon { background: var(--soon-bg); color: var(--soon); }
+.left.near { background: var(--near-bg); color: var(--near); }
+.due .note { color: var(--muted); font-size: .85rem; }
+.main { min-width: 0; display: grid; gap: .35rem; }
+.meta { color: var(--muted); display: flex; flex-wrap: wrap; gap: .25rem .6rem; }
+.meta .st { font-weight: 600; color: var(--ink); }
+.main h3 { font-weight: 600; font-size: 1.12rem; line-height: 1.3; }
+.facts { display: flex; flex-wrap: wrap; gap: .3rem 1rem; font-size: .9rem; }
+.facts span { color: var(--muted); }
+.facts strong { font-weight: 600; color: var(--ink); }
+details summary { cursor: pointer; color: var(--brand); font-weight: 600; font-size: .9rem; }
+details p { margin: .35rem 0 0; color: var(--muted); max-width: 70ch; font-size: .95rem; }
+details .lbl { display: block; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-top: .5rem; }
+.tags { display: flex; flex-wrap: wrap; gap: .3rem; }
+.tags span { font-size: .78rem; border: 1px solid var(--rule); padding: .05rem .4rem; border-radius: 2px; color: var(--muted); }
+.go { display: grid; gap: .25rem; justify-items: end; text-align: right; }
+.go a { white-space: nowrap; font-weight: 600; text-decoration: none; background: var(--brand); color: var(--brand-ink); padding: .4rem .75rem; border-radius: 3px; }
+.go a:hover { text-decoration: underline; }
+.go .how { color: var(--muted); max-width: 13rem; }
+.empty { padding: 2rem 0; color: var(--muted); }
+
+footer { padding-block: 2rem 3rem; color: var(--muted); font-size: .9rem; }
+footer .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.5rem; }
+footer h2 { font-size: .95rem; font-weight: 600; color: var(--ink); margin-bottom: .35rem; }
+footer p { margin: 0 0 .5rem; max-width: 60ch; }
+
+@media (max-width: 720px) {
+  .row { grid-template-columns: minmax(0, 1fr); gap: .6rem; }
+  .due { grid-template-columns: auto auto 1fr; align-items: baseline; gap: .5rem; }
+  .left { justify-self: end; margin-top: 0; }
+  .go { justify-items: start; text-align: left; }
+  .shown { margin-left: 0; width: 100%; }
+}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top"><i aria-hidden="true"></i>GrantTopics</a>
+    <span class="mono checked" id="checked"></span>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap intro">
+    <h1>Every open and upcoming SBIR and STTR topic, by deadline.</h1>
+    <p>Federal R&amp;D funding for startups, pulled from Grants.gov and the Department of Defense SBIR/STTR portal. Each deadline is copied from the official listing, and every topic links back to it.</p>
+    <div class="counts" id="counts"></div>
+  </div>
+
+  <div class="controls">
+    <div class="wrap">
+      <input class="search" id="q" type="search" placeholder="Search topics, keywords or codes" aria-label="Search topics">
+      <div class="seg" role="group" aria-label="Status" id="seg-status">
+        <button type="button" id="st-all" data-v="all">All</button>
+        <button type="button" id="st-open" data-v="open">Open now</button>
+        <button type="button" id="st-up" data-v="upcoming">Upcoming</button>
+      </div>
+      <div class="seg" role="group" aria-label="Program" id="seg-prog">
+        <button type="button" id="pg-all" data-v="all">Both</button>
+        <button type="button" id="pg-sbir" data-v="SBIR">SBIR</button>
+        <button type="button" id="pg-sttr" data-v="STTR">STTR</button>
+      </div>
+      <select id="agency" aria-label="Agency"></select>
+      <span class="mono shown" id="shown"></span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <ol class="docket" id="list"></ol>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap cols">
+    <div>
+      <h2>Confirm before you apply</h2>
+      <p>GrantTopics is for information only. Deadlines, amounts and eligibility are copied from the official listing, but agencies change them. Always confirm on the official page before you apply.</p>
+      <p>We don't decide who is eligible, and we don't write applications.</p>
+    </div>
+    <div>
+      <h2>Sources</h2>
+      <p>Grants.gov public API and the DoD SBIR/STTR portal's public topic search. DoD times are shown in US Eastern time.</p>
+      <p id="excluded"></p>
+    </div>
+    <div>
+      <h2>Weekly digest</h2>
+      <p>A free Monday email with new topics and deadlines in the next 30 days is on the way.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const DATA = __GT_DATA__;
+(function () {
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+  const ET = "America/New_York";
+  const fmt = (d, o) => new Intl.DateTimeFormat("en-US", { timeZone: ET, ...o }).format(d);
+  const now = new Date();
+  const todayET = fmt(now, { year: "numeric", month: "2-digit", day: "2-digit" }).replace(/(\d+)\/(\d+)\/(\d+)/, "$3-$1-$2");
+  const dayDiff = (a, b) => Math.round((Date.parse(b + "T00:00:00Z") - Date.parse(a + "T00:00:00Z")) / 86400000);
+
+  // Normalize each item's deadline for sorting and display.
+  const items = DATA.items.map(it => {
+    let sortKey = Infinity, day = "", yr = "", time = "", left = null, closed = false;
+    if (it.closeAt) {
+      const d = new Date(it.closeAt);
+      sortKey = d.getTime();
+      day = fmt(d, { month: "short", day: "numeric" });
+      yr = fmt(d, { year: "numeric" });
+      time = fmt(d, { hour: "numeric", minute: "2-digit" }) + " ET";
+      left = dayDiff(todayET, fmt(d, { year: "numeric", month: "2-digit", day: "2-digit" }).replace(/(\d+)\/(\d+)\/(\d+)/, "$3-$1-$2"));
+      closed = d < now;
+    } else if (it.closeDay) {
+      const d = new Date(it.closeDay + "T12:00:00Z");
+      sortKey = Date.parse(it.closeDay + "T23:59:00-05:00");
+      day = new Intl.DateTimeFormat("en-US", { timeZone: "UTC", month: "short", day: "numeric" }).format(d);
+      yr = it.closeDay.slice(0, 4);
+      left = dayDiff(todayET, it.closeDay);
+      closed = left < 0;
+    }
+    const upcoming = it.status !== "Open";
+    return { ...it, sortKey, day, yr, time, left, closed, upcoming };
+  }).filter(it => !it.closed);
+
+  const open = items.filter(i => !i.upcoming).length;
+  const soon = items.filter(i => !i.upcoming && i.left !== null && i.left <= 14).length;
+  document.getElementById("checked").textContent = "Sources checked " + fmt(new Date(DATA.checkedAt), { month: "short", day: "numeric", year: "numeric" });
+  document.getElementById("counts").innerHTML =
+    `<div><b>${open}</b><span>open now</span></div><div><b>${items.length - open}</b><span>upcoming</span></div><div class="hot"><b>${soon}</b><span>closing in 14 days</span></div>`;
+  document.getElementById("excluded").textContent = `${DATA.excluded} broad research calls that only mention SBIR in passing are left out.`;
+
+  const groups = [...new Set(items.map(i => i.group))].sort();
+  const agencySel = document.getElementById("agency");
+  agencySel.innerHTML = `<option value="all">All agencies</option>` + groups.map(g => `<option value="${esc(g)}">${esc(g)}</option>`).join("");
+
+  const state = { q: "", status: store.get("gt-status") || "all", prog: "all", agency: "all" };
+
+  function leftChip(it) {
+    if (it.left === null) return "";
+    const cls = it.left <= 14 ? "soon" : it.left <= 30 ? "near" : "";
+    const label = it.upcoming ? (it.left === 0 ? "Closes today" : `Closes in ${it.left} days`) : (it.left === 0 ? "Due today" : it.left === 1 ? "1 day left" : `${it.left} days left`);
+    return `<span class="left ${cls}">${label}</span>`;
+  }
+  function row(it) {
+    const due = it.day
+      ? `<span class="day">${esc(it.day)}</span><span class="mono yr">${esc(it.yr)}${it.time ? " · " + esc(it.time) : ""}</span>${leftChip(it)}`
+      : `<span class="day">${it.estClose ? "Est." : "See listing"}</span><span class="note">${esc(it.estClose || it.closeNote || "No deadline given")}</span>`;
+    const facts = [
+      it.award ? `<span>Award ceiling <strong>${esc(it.award)}</strong></span>` : `<span>Award amount <strong>${it.source === "Grants.gov" ? "Not listed" : "See solicitation"}</strong></span>`,
+      it.itar === true ? `<span><strong>ITAR</strong> restricted</span>` : "",
+    ].join("");
+    return `<li class="row">
+      <div class="due">${due}</div>
+      <div class="main">
+        <div class="meta mono"><span class="st">${esc(it.status)}</span><span>${esc(it.program)}</span><span>${esc(it.agency)}</span><span>${esc(it.code)}</span></div>
+        <h3>${esc(it.title)}</h3>
+        <div class="facts">${facts}</div>
+        ${it.tags.length ? `<div class="tags">${it.tags.map(t => `<span>${esc(t)}</span>`).join("")}</div>` : ""}
+        ${it.summary ? `<details><summary>Details</summary><span class="lbl">${esc(it.summaryLabel)}</span><p>${esc(it.summary)}</p></details>` : ""}
+      </div>
+      <div class="go"><a href="${esc(it.url)}" target="_blank" rel="noopener">Official page ↗</a>${it.how ? `<span class="mono how">${esc(it.how)}</span>` : ""}</div>
+    </li>`;
+  }
+  function render() {
+    for (const [id, key] of [["seg-status", "status"], ["seg-prog", "prog"]])
+      document.querySelectorAll(`#${id} button`).forEach(b => b.setAttribute("aria-pressed", b.dataset.v === state[key]));
+    agencySel.value = state.agency;
+    const q = state.q.trim().toLowerCase();
+    const list = items.filter(it =>
+      (state.status === "all" || (state.status === "open" ? !it.upcoming : it.upcoming)) &&
+      (state.prog === "all" || it.program === state.prog) &&
+      (state.agency === "all" || it.group === state.agency) &&
+      (!q || [it.title, it.code, it.agency, it.summary, it.tags.join(" ")].join(" ").toLowerCase().includes(q))
+    ).sort((a, b) => a.sortKey - b.sortKey);
+    document.getElementById("shown").textContent = `${list.length} of ${items.length} topics`;
+    document.getElementById("list").innerHTML = list.length ? list.map(row).join("")
+      : `<li class="empty">No topics match. Clear the search or choose "All".</li>`;
+  }
+  document.getElementById("q").addEventListener("input", e => { state.q = e.target.value; render(); });
+  document.getElementById("seg-status").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; state.status = b.dataset.v; store.set("gt-status", state.status); render(); });
+  document.getElementById("seg-prog").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; state.prog = b.dataset.v; render(); });
+  agencySel.addEventListener("change", e => { state.agency = e.target.value; render(); });
+  render();
+})();
+</script>
